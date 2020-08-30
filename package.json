@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build && mv dist/index.html dist/LockBackground.html",
+    "copy": "scp -r ./dist/* root@192.168.0.9:/User/Library/LockHTML/XenUltimatum/",
+    "lint": "vue-cli-service lint",
+    "push": "yarn build && yarn copy"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -28,6 +30,10 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
+    "node-sass": "^4.14.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.1",
+    "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHooks": {

@@ -1,32 +1,65 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
+    <Nav />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import { mapState } from 'vuex';
+  import Nav from './components/Nav';
+  export default {
+    components: {
+      Nav,
+    },
+    computed: {
+      ...mapState(['musicData']),
+    },
 
-#nav {
-  padding: 30px;
-}
+    watch: {
+      musicData(newValue, oldValue) {
+        if (newValue.isplaying) {
+          console.log('music is playing...');
+          this.$router.push('music');
+        }
+      },
+    },
+  };
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style lang="scss">
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  body,
+  html {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  @font-face {
+    font-family: icomoon;
+    src: url('./assets/icomoon.ttf') format('truetype');
+  }
+
+  .icon {
+    font-family: icomoon;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
 </style>

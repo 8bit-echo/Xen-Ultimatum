@@ -1,17 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <script>
+      function mainUpdate(type) {
+        switch (type) {
+          case 'weather':
+            window.app.$store.commit('WEATHER_DATA', weather);
+            break;
+
+          case 'statusbar':
+            window.app.$store.commit('STATUS_BAR_DATA', {
+              signalBars,
+              signalNetworkType,
+              signalName,
+              wifiStrength,
+              wifiBars,
+              wifiName,
+              // bluetooth,
+            });
+            break;
+
+          case 'battery':
+            window.app.$store.commit('BATTERY_DATA', {
+              batteryPercent,
+              batteryCharging,
+              ramFree,
+              ramUsed,
+              ramAvailable,
+              ramPhysical,
+            });
+
+            break;
+
+          case 'reminders':
+            window.app.$store.commit('ALARM_DATA', {reminders});
+            break;
+
+          case 'events':
+            window.app.$store.commit('SYSTEM_DATA', {events});
+            break;
+
+          case 'music':
+            window.app.$store.commit('MUSIC_DATA', {
+              artist,
+              album,
+              title,
+              isplaying,
+              musicBundle,
+              currentDuration,
+              currentElapsedTime,
+              shuffleEnabled,
+              repeatEnabled
+            });
+            break;
+
+          case 'system':
+            window.app.$store.commit('EVENT_DATA', {
+              deviceName,
+              deviceType,
+              systemVersion,
+              twentyfourhour,
+              ipAddress,
+              notificationShowing,
+            });
+            break;
+
+          case 'alarm':
+            window.app.$store.commit('REMINDER_DATA', {
+              alarms,
+              alarmString,
+              alarmDay,
+              alarmHour,
+              alarmMinute,
+            });
+            break;
+
+          default:
+            break;
+        }
+        console.log(window.app.$store.state)
+      }
+    </script>
   </body>
 </html>
