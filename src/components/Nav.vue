@@ -3,15 +3,19 @@
     <router-link to="/">·</router-link>
     <router-link to="/about">··</router-link>
     <router-link to="/music" class="icon">&#xe911;</router-link>
+    <a v-for="app in customApps" :href="`xeninfo:openapp:${app}`" :key="app">I</a>
     <a href="xeninfo:openapp:com.apple.springboard" class="icon">&#xe990;</a>
   </div>
 </template>
 
 <script>
+  import prefs from '../../public/preferences.json';
+  console.log(prefs);
   export default {
     data() {
       return {
         musicIcon: require('../assets/music.svg'),
+        customApps: prefs.customDockApps,
       };
     },
   };
