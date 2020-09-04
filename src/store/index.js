@@ -41,6 +41,9 @@ export default new Vuex.Store({
     REMINDER_DATA(state, payload) {
       state.reminderData = payload;
     },
+    TRACK_PROGRESS(state, payload) {
+      state.musicData = { ...state.musicData, currentElapsedTime: payload };
+    },
   },
   actions: {
     updateWeather({ commit, state }) {

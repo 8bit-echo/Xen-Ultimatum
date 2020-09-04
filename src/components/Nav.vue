@@ -1,11 +1,13 @@
 <template>
-  <div id="nav">
-    <router-link to="/">·</router-link>
-    <router-link to="/about">··</router-link>
-    <router-link to="/music" class="icon">&#xe911;</router-link>
-    <a v-for="app in customApps" :href="`xeninfo:openapp:${app}`" :key="app">I</a>
-    <a href="xeninfo:openapp:com.apple.springboard" class="icon">&#xe990;</a>
-  </div>
+  <transition appear name="slideup">
+    <div class="nav">
+      <router-link to="/">·</router-link>
+      <router-link to="/about">··</router-link>
+      <router-link to="/music" class="icon">&#xe911;</router-link>
+      <a v-for="app in customApps" :href="`xeninfo:openapp:${app}`" :key="app">I</a>
+      <a href="xeninfo:openapp:com.apple.springboard" class="icon">&#xe990;</a>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -22,13 +24,13 @@
 </script>
 
 <style lang="scss">
-  #nav {
+  .nav {
     overflow: visible;
     display: flex;
     position: fixed;
     z-index: 5;
     bottom: 0;
-    background-color: rgb(14, 14, 14);
+    background-color: black;
     color: white;
     width: 100%;
     justify-content: center;
@@ -66,6 +68,13 @@
         border-radius: 50%;
         border: solid 3px rgb(39, 39, 39);
       }
+    }
+  }
+
+  .slideup-enter {
+    bottom: -100px;
+    &-active {
+      transition: bottom 0.25s 1s ease-out;
     }
   }
 

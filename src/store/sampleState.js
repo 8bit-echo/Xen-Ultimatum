@@ -479,7 +479,7 @@ const sampleState = {
     ramPhysical: 2819,
     ramUsed: 1317,
   },
-  eventData: {
+  systemData: {
     deviceName: 'Airdrop Bandit',
     deviceType: 'iPhone X',
     ipAddress: '',
@@ -492,6 +492,8 @@ const sampleState = {
     artist: 'Coheed and Cambria',
     isplaying: 1,
     title: "Jessie's Girl 2 [feat. Rick Springfield]",
+    currentElapsedTime: '--:--',
+    currentDuration: '--:--',
   },
   reminderData: {},
   statusBarData: {
@@ -502,7 +504,7 @@ const sampleState = {
     wifiName: 'The Curiosity Shop',
     wifiStrength: '-49',
   },
-  systemData: {
+  eventData: {
     events: [
       {
         associatedCalendarHexColor: '#FF9500',
@@ -928,4 +930,4 @@ const sampleState = {
   },
 };
 
-export default sampleState
+export default sampleState;

@@ -61,5 +61,10 @@
     color: white;
     height: 100%;
     width: 100%;
+    text-shadow: 0 0 1rem rgba(black, 0.75);
+    // background-image: url(https://picsum.photos/375/812);
+    // background-repeat: no-repeat;
+    // background-position: center;
+    // background-size: cover;
   }
 </style>

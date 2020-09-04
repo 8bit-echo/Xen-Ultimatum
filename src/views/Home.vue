@@ -1,16 +1,17 @@
 <template>
-  <div class="home">
-    <div class="container">
-      <p><img :src="weatherIcon" :alt="weatherData.condition"/></p>
-      <div class="conditions">
-
-        <h5>&darr;{{ weatherData.low }}</h5>
-        <h1>{{ weatherData.feelsLike ? weatherData.feelsLike : '--' }}</h1>
-        <h5>&uarr;{{ weatherData.high }}</h5>
+  <transition appear name="fadein">
+    <div class="home">
+      <div class="container">
+        <p><img :src="weatherIcon" :alt="weatherData.condition" /></p>
+        <div class="conditions">
+          <h5>&darr;{{ weatherData.low }}</h5>
+          <h1>{{ weatherData.feelsLike ? weatherData.feelsLike : '--' }}</h1>
+          <h5>&uarr;{{ weatherData.high }}</h5>
+        </div>
+        <p>{{ weatherData.condition }}</p>
       </div>
-      <p>{{ weatherData.condition }}</p>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -40,8 +41,11 @@
     justify-content: center;
     align-items: center;
     margin-top: -10vmin;
+    opacity: 1;
     font-size: 1.25em;
+    // transition: opacity 0.25s ease-out;
   }
+
   .conditions {
     width: 100%;
     display: flex;
@@ -55,6 +59,14 @@
       }
     }
   }
+
+  .fadein-enter {
+    opacity: 0;
+    &-active {
+      transition: opacity 1s ease-out;
+    }
+  }
+
   p {
     margin: 0;
   }

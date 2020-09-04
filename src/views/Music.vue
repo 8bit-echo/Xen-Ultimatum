@@ -4,18 +4,22 @@
     <div class="foreground">
       <div :class="{ 'album-artwork': true, playing: musicData.isplaying }" :style="{ backgroundImage: `url(${albumArt})` }"></div>
 
-      <div class="track-info" v-show="musicData.isplaying">
+      <div class="track-info">
         <h2 class="song">{{ musicData.title }}</h2>
         <h3 class="artist">{{ musicData.artist }}</h3>
         <h4 class="album">{{ musicData.album }}</h4>
       </div>
 
-      <div class="controls">
-        <a href="xeninfo:prevtrack" class="prev smaller"><img src="xui://resource/default/media/previous.svg" /></a>
-        <a href="xeninfo:playpause" class="play-pause"><img :src="playPauseIcon" /></a>
-        <a href="xeninfo:nexttrack" class="next smaller">
-          <img src="xui://resource/default/media/next.svg" />
-        </a>
+      <div class="track-ui">
+        <div class="progress">{{ musicData.currentElapsedTime }} | {{ t }}================== {{ musicData.currentDuration }}</div>
+
+        <div class="controls">
+          <a href="xeninfo:prevtrack" class="prev smaller"><img src="xui://resource/default/media/previous.svg" /></a>
+          <a href="xeninfo:playpause" class="play-pause"><img :src="playPauseIcon" /></a>
+          <a href="xeninfo:nexttrack" class="next smaller">
+            <img src="xui://resource/default/media/next.svg" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +33,7 @@
     data() {
       return {
         key: 0,
+        t: '--:--',
       };
     },
     computed: {
@@ -52,8 +57,8 @@
     watch: {
       musicData: {
         handler(newVal, oldVal) {
-          if (newVal.tite !== oldVal.title) {
-            this.key = Math.floor(Math.random() * 1000);
+          if (newVal.currentElapsedTime !== oldVal.currentElapsedTime) {
+            this.t = newVal.currentElapsedTime;
           }
         },
         deep: true,
@@ -211,17 +216,26 @@
       position: relative;
       z-index: 3;
       text-align: left;
+      padding: 0 10px;
+    }
+
+    .track-ui {
+      position: relative;
+      top: 25vh;
     }
 
     .song {
       font-style: italic;
       text-transform: uppercase;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
+      word-break: break-word;
+      font-weight: 900;
     }
 
     .artist {
-      font-size: 1rem;
+      font-size: 1.2rem;
       width: 35vw;
+      font-weight: lighter;
       // background: pink;
     }
 
@@ -235,7 +249,7 @@
       display: flex;
       align-items: center;
       margin-left: 5%;
-      top: 10vh;
+      top: 5vh;
       a {
         max-width: 50px;
         margin: 0 10px;
