@@ -35,6 +35,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: 5px 0;
+    text-shadow: none;
 
     &::before {
       background-image: url('../assets/corners.png');
@@ -78,8 +79,9 @@
   }
 
   @media (prefers-color-scheme: light) {
-    #nav {
+    .nav {
       background-color: whitesmoke;
+      text-shadow: none !important;
       a {
         color: black;
         &.router-link-exact-active {

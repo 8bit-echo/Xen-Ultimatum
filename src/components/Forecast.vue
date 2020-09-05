@@ -1,7 +1,7 @@
 <template>
-  <transition name="slideup">
-    <div class="forecast-sheet" @dblclick="$store.commit('TOGGLE_FORECAST', false)">
-      <div class="pages">
+  <transition appear name="slidein">
+    <div class="forecast-sheet" @dblclick="dismiss()">
+      <div class="pages" ref="pages" v-swipe.left="leftSwipe" v-swipe.right="rightSwipe" v-swipe.down="dismiss">
         <section class="page">
           <h3>Hourly</h3>
           <div class="contents">
@@ -31,7 +31,9 @@
       </div>
 
       <nav class="tabnav">
-        · ·
+        <span :class="{ active: page === 0 }">·</span>
+        &nbsp;
+        <span :class="{ active: page === 1 }">·</span>
       </nav>
     </div>
   </transition>
@@ -77,6 +79,20 @@
         const percent = parseFloat((((temp - this.fiveDayMin) / (this.fiveDayMax - this.fiveDayMin)) * 100).toFixed(1));
         return `${percent}%`;
       },
+
+      leftSwipe() {
+        this.$refs.pages.scrollTo({ left: 1000, top: 0, behavior: 'smooth' });
+        this.page = 1;
+      },
+
+      rightSwipe() {
+        this.$refs.pages.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+        this.page = 0;
+      },
+
+      dismiss() {
+        this.$store.commit('TOGGLE_FORECAST', false);
+      },
     },
   };
 </script>
@@ -91,11 +107,11 @@
     padding: 1rem;
     border-radius: 1.5rem;
     width: 90vw;
-    // height: 30vh;
     margin: auto;
     background-color: rgba(black, 0.4);
     backdrop-filter: blur(30px);
     text-shadow: none;
+    transition: bottom 0.2s ease-in-out;
 
     @media (prefers-color-scheme: light) {
       background-color: rgba(white, 0.25);
@@ -112,6 +128,9 @@
     align-items: flex-end;
     overflow-x: scroll;
     overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .page {
@@ -132,6 +151,19 @@
     display: flex;
     justify-content: space-around;
     padding-bottom: 5px;
+  }
+
+  .tabnav {
+    font-size: 1.75rem;
+    font-weight: bold;
+    line-height: 1;
+
+    span {
+      opacity: 0.4;
+      &.active {
+        opacity: 1;
+      }
+    }
   }
 
   .pill {
@@ -158,5 +190,14 @@
         background-color: orange;
       }
     }
+  }
+
+  .slidein-enter,
+  .slidein-enter-active {
+    bottom: -40vh;
+  }
+
+  .slidein-leave-to {
+    bottom: -40vh;
   }
 </style>
