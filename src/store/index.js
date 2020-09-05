@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import state from './sampleState';
+import sampleState from './sampleState';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state,
+  state: {
+    ...sampleState,
+    showingForecasts: false,
+  },
   // state: {
   //   weatherData: {},
   //   statusBarData: {},
@@ -43,6 +46,9 @@ export default new Vuex.Store({
     },
     TRACK_PROGRESS(state, payload) {
       state.musicData = { ...state.musicData, currentElapsedTime: payload };
+    },
+    TOGGLE_FORECAST(state, payload) {
+      state.showingForecasts = payload;
     },
   },
   actions: {

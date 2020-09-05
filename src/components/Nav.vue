@@ -12,7 +12,6 @@
 
 <script>
   import prefs from '../../public/preferences.json';
-  console.log(prefs);
   export default {
     data() {
       return {
@@ -74,7 +73,7 @@
   .slideup-enter {
     bottom: -100px;
     &-active {
-      transition: bottom 0.25s 1s ease-out;
+      transition: bottom 0.25s 0.5s ease-out;
     }
   }
 

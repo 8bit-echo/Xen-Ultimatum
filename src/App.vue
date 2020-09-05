@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{ backgroundImage }">
     <router-view />
     <Nav />
   </div>
@@ -14,6 +14,9 @@
     },
     computed: {
       ...mapState(['musicData']),
+      backgroundImage() {
+        return process.env.NODE_ENV === 'development' ? 'url(https://picsum.photos/375/812)' : 'none';
+      },
     },
 
     watch: {
@@ -63,8 +66,16 @@
     width: 100%;
     text-shadow: 0 0 1rem rgba(black, 0.75);
     // background-image: url(https://picsum.photos/375/812);
-    // background-repeat: no-repeat;
-    // background-position: center;
-    // background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .temp {
+    margin: 0 1rem;
+    &::after {
+      position: absolute;
+      content: '°';
+    }
   }
 </style>
