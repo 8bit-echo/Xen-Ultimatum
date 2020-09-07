@@ -19,7 +19,7 @@
   import { mapState, mapMutations } from 'vuex';
   import Forecast from '../components/Forecast';
   import WeatherIcon from '../components/WeatherIcon';
-  console.log('home loaded');
+  // console.log('home loaded');
   export default {
     name: 'Home',
     components: {
@@ -28,6 +28,9 @@
     },
     computed: {
       ...mapState(['weatherData', 'showingForecasts']),
+      remote() {
+        return api.apps.applicationForIdentifier('com.apple.TVRemote').icon;
+      },
     },
     methods: {
       ...mapMutations([]),

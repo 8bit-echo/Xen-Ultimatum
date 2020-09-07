@@ -13,20 +13,19 @@
       Nav,
     },
     computed: {
-      ...mapState(['musicData']),
+      ...mapState(['music']),
       backgroundImage() {
         return process.env.NODE_ENV === 'development' ? 'url(https://picsum.photos/375/812)' : 'none';
-      },
+      }
     },
 
-    watch: {
-      musicData(newValue, oldValue) {
-        if (newValue.isplaying) {
-          console.log('music is playing...');
-          this.$router.push('music');
-        }
-      },
-    },
+    // watch: {
+    //   music(newValue, oldValue) {
+    //     if (newValue.isplaying) {
+    //       this.$router.push('music');
+    //     }
+    //   },
+    // },
   };
 </script>
 

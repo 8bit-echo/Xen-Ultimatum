@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import SwipeRecognizer from './components/SwipeRecognizer';
 import fixScrollbehavior from 'smoothscroll-polyfill';
+require('../public/config.json');
 
 fixScrollbehavior.polyfill();
 

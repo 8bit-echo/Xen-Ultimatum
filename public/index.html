@@ -7,6 +7,7 @@
   </head>
   <body>
     <div id="app"></div>
+    <script src="./preferences.js"></script>
     <script>
       function mainUpdate(type) {
         switch (type) {
@@ -46,19 +47,19 @@
             window.app.$store.commit('EVENT_DATA', { events });
             break;
 
-          case 'music':
-            window.app.$store.commit('MUSIC_DATA', {
-              artist,
-              album,
-              title,
-              isplaying,
-              musicBundle,
-              currentDuration,
-              currentElapsedTime,
-              shuffleEnabled,
-              repeatEnabled,
-            });
-            break;
+          // case 'music':
+          //   window.app.$store.commit('MUSIC_DATA', {
+          //     artist,
+          //     album,
+          //     title,
+          //     isplaying,
+          //     musicBundle,
+          //     currentDuration,
+          //     // currentElapsedTime,
+          //     shuffleEnabled,
+          //     repeatEnabled,
+          //   });
+          //   break;
 
           case 'system':
             window.app.$store.commit('SYSTEM_DATA', {
@@ -75,7 +76,7 @@
             window.app.$store.commit('ALARM_DATA', {
               alarms,
               // alarmString,
-              alarmDay,
+              // alarmDay,
               alarmHour,
               alarmMinute,
             });
@@ -86,12 +87,19 @@
         }
       }
 
-      function XenApi() {
-        api.media.observeElapsedTime((newElapsedTime) => {
-          console.log(newElapsedTime, api.media.nowPlaying.length);
-          window.app.$store.commit('TRACK_PROGRESS', newElapsedTime);
+      api.media.observeElapsedTime(newElapsedTime => {
+        window.app.$store.commit('TRACK_PROGRESS', newElapsedTime);
+      });
+
+      api.media.observeData(({isPlaying, isStopped, nowPlaying, volume, queue}) => {
+        window.app.$store.commit('MUSIC_DATA', {
+          isPlaying,
+          isStopped,
+          nowPlaying,
+          volume,
+          queue
         });
-      }
+      });
     </script>
   </body>
 </html>

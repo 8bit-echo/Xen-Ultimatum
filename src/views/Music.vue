@@ -2,16 +2,20 @@
   <div class="music dribbble-theme">
     <div class="background-art" :style="{ backgroundImage: `url(${albumArt})` }"></div>
     <div class="foreground">
-      <div :class="{ 'album-artwork': true, playing: musicData.isplaying }" :style="{ backgroundImage: `url(${albumArt})` }"></div>
+      <div :class="{ 'album-artwork': true, playing: music.isPlaying }" :style="{ backgroundImage: `url(${albumArt})` }"></div>
 
       <div class="track-info">
-        <h2 class="song">{{ musicData.title }}</h2>
-        <h3 class="artist">{{ musicData.artist }}</h3>
-        <h4 class="album">{{ musicData.album }}</h4>
+        <h2 class="song">{{ title }}</h2>
+        <h3 class="artist">{{ artist }}</h3>
+        <h4 class="album">{{ album }}</h4>
       </div>
 
       <div class="track-ui">
-        <div class="progress">{{ musicData.currentElapsedTime }} | {{ t }}================== {{ musicData.currentDuration }}</div>
+        <div class="progress">
+          {{ music.elapsed | toTimestamp }}
+          <ProgressBar :complete="complete" />
+          {{ duration | toTimestamp }}
+        </div>
 
         <div class="controls">
           <a href="xeninfo:prevtrack" class="prev smaller"><img src="xui://resource/default/media/previous.svg" /></a>
@@ -27,39 +31,62 @@
 
 <script>
   import { mapState } from 'vuex';
+  import ProgressBar from '../components/ProgressBar';
   // const albumBase = require('../assets/Artwork.jpg');
   const albumBase = 'file:///var/mobile/Documents/Artwork.jpg';
   export default {
-    data() {
-      return {
-        key: 0,
-        t: '--:--',
-      };
+    components: {
+      ProgressBar,
     },
     computed: {
-      ...mapState(['musicData']),
-      albumArt() {
-        return this.musicData.title !== '(null)' ? `${albumBase}?v=${this.key}` : 'xui://resource/default/media/no-artwork.svg';
-      },
-      song() {
-        return this.musicData.title !== '(null)' ? this.musicData.title : '';
+      ...mapState(['music']),
+      title() {
+        return this.music.nowPlaying ? this.music.nowPlaying.title : '';
       },
       artist() {
-        return this.musicData.artist !== '(null)' ? this.musicData.artist : '';
+        return this.music.nowPlaying ? this.music.nowPlaying.artist : '';
       },
       album() {
-        return this.musicData.album !== '(null)' ? this.musicData.album : '';
+        return this.music.nowPlaying ? this.music.nowPlaying.album : '';
+      },
+      duration() {
+        return this.music.nowPlaying && this.music.nowPlaying.length ? this.music.nowPlaying.length : 0;
+      },
+      albumArt() {
+        return this.music.isStopped ? `${albumBase}` : this.music.nowPlaying?.artwork;
       },
       playPauseIcon() {
-        return this.musicData.isplaying ? 'xui://resource/default/media/pause.svg' : 'xui://resource/default/media/play.svg';
+        return this.music.isPlaying ? 'xui://resource/default/media/pause.svg' : 'xui://resource/default/media/play.svg';
+      },
+      complete() {
+        return Math.floor((this.music.elapsed / this.duration) * 100);
+      },
+    },
+
+    filters: {
+      toTimestamp(seconds) {
+        const mins = Math.round(seconds / 60);
+        let sec = Math.round(seconds % 60);
+
+        if (sec < 10) {
+          sec = '0' + sec;
+        }
+        if (isNaN(mins) || isNaN(sec)) {
+          return '--:--';
+        }
+
+        return mins + ':' + sec;
+      },
+    },
+    methods: {
+      toSeconds(timestamp) {
+        const parts = timestamp.split(':');
+        return parts.map((part, i) => (i !== parts.length - 1 ? parseInt(part) * Math.pow(60, i + 1) : parseInt(part))).reduce((seconds, part) => seconds + part);
       },
     },
     watch: {
-      musicData: {
+      music: {
         handler(newVal, oldVal) {
-          if (newVal.currentElapsedTime !== oldVal.currentElapsedTime) {
-            this.t = newVal.currentElapsedTime;
-          }
         },
         deep: true,
       },
@@ -81,8 +108,8 @@
       bottom: 0;
       right: 0;
       z-index: 0;
-      width: 120%;
-      height: 120%;
+      // width: 120%;
+      // height: 120%;
       // background-image: url('../assets/Artwork.jpg');
       // background-image: url(file:///var/mobile/Documents/Artwork.jpg);
       background-size: cover;
@@ -113,14 +140,22 @@
 
       h3,
       h4 {
+        min-height: 1.5rem;
         font-weight: normal;
       }
+    }
+
+    .progress {
+      max-width: 80vw;
+      margin: auto;
+      display: flex;
     }
 
     .controls {
       display: flex;
       justify-content: space-around;
       align-items: center;
+      margin-top: 2rem;
 
       button,
       a {
@@ -206,7 +241,7 @@
       position: relative;
       z-index: 2;
       padding-top: 10vh;
-      background: rgba(#222, 75%);
+      background: rgba(#222, 25%);
       height: 100%;
     }
 
@@ -217,11 +252,18 @@
       z-index: 3;
       text-align: left;
       padding: 0 10px;
+      min-height: 9rem;
     }
 
     .track-ui {
       position: relative;
       top: 25vh;
+
+      .progress {
+        max-width: 80vw;
+        margin: auto;
+        display: flex;
+      }
     }
 
     .song {

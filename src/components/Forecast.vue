@@ -5,7 +5,7 @@
         <section class="page">
           <h3>Hourly</h3>
           <div class="contents">
-            <div class="weather-info" v-for="hour in weatherData.hourlyForecasts.slice(0, 5)" :key="hour.time">
+            <div class="weather-info" v-for="hour in hourlyForecasts" :key="hour.time">
               <WeatherIcon :condition="hour.conditionCode" />
               <span class="temp">{{ hour.temperature }}</span>
               <div class="pill" :style="{ background: bgFromTemp(hour.temperature) }"></div>
@@ -17,7 +17,7 @@
         <section class="page">
           <h3>Daily</h3>
           <div class="contents">
-            <div class="weather-info" v-for="day in weatherData.dayForecasts.slice(0, 5)" :key="day.dayNumber">
+            <div class="weather-info" v-for="day in dayForecasts" :key="day.dayNumber">
               <WeatherIcon :condition="day.icon" />
               <span class="temp">{{ day.high }}</span>
               <div class="pill">
@@ -60,6 +60,12 @@
       },
       fiveDayMin() {
         return Math.min(...this.weatherData.dayForecasts.slice(0, 5).map((day) => day.low));
+      },
+      hourlyForecasts() {
+        return this.weatherData.hourlyForecasts ? this.weatherData.hourlyForecasts.slice(0, 5) : [];
+      },
+      dayForecasts() {
+        return this.weatherData.dayForecasts ? this.weatherData.dayForecasts.slice(0, 5) : [];
       },
     },
 

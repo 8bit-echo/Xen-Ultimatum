@@ -7,7 +7,8 @@
     props: {
       condition: {
         type: Number,
-        required: true,
+        required: false,
+        default: 32
       },
     },
     computed: {

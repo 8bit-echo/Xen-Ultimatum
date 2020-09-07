@@ -1,24 +1,22 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import sampleState from './sampleState';
+// import sampleState from './sampleState';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    ...sampleState,
+    weatherData: {},
+    statusBarData: {},
+    batteryData: {},
+    alarmData: {},
+    systemData: {},
+    music: {},
+    eventData: {},
+    reminderData: {},
+    // ...sampleState,
     showingForecasts: false,
   },
-  // state: {
-  //   weatherData: {},
-  //   statusBarData: {},
-  //   batteryData: {},
-  //   alarmData: {},
-  //   systemData: {},
-  //   musicData: {},
-  //   eventData: {},
-  //   reminderData: {},
-  // },
   mutations: {
     WEATHER_DATA(state, payload) {
       state.weatherData = payload;
@@ -36,7 +34,7 @@ export default new Vuex.Store({
       state.systemData = payload;
     },
     MUSIC_DATA(state, payload) {
-      state.musicData = payload;
+      state.music = payload;
     },
     EVENT_DATA(state, payload) {
       state.eventData = payload;
@@ -45,7 +43,7 @@ export default new Vuex.Store({
       state.reminderData = payload;
     },
     TRACK_PROGRESS(state, payload) {
-      state.musicData = { ...state.musicData, currentElapsedTime: payload };
+      state.music = { ...state.music, elapsed: payload };
     },
     TOGGLE_FORECAST(state, payload) {
       state.showingForecasts = payload;

@@ -29,11 +29,14 @@
     computed: {
       ...mapState(['batteryData', 'eventData']),
       todaysEvents() {
-        const upcoming = this.eventData.events.filter((event) => {
-          return isToday(new Date(event.date));
-        });
+        if (this.eventData.events) {
+          const upcoming = this.eventData.events.filter((event) => {
+            return isToday(new Date(event.date));
+          });
 
-        return upcoming.length > 5 ? upcoming.slice(0, 5) : upcoming;
+          return upcoming.length > 5 ? upcoming.slice(0, 5) : upcoming;
+        }
+        return [];
       },
     },
     filters: {

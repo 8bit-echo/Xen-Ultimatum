@@ -487,13 +487,16 @@ const sampleState = {
     systemVersion: '13.5.1',
     twentyfourhour: 1,
   },
-  musicData: {
-    album: "Jessie's Girl 2 [feat. Rick Springfield] - Single",
-    artist: 'Coheed and Cambria',
-    isplaying: 1,
-    title: "Jessie's Girl 2 [feat. Rick Springfield]",
-    currentElapsedTime: '--:--',
-    currentDuration: '--:--',
+  music: {
+    isPlaying: true,
+    isStopped: false,
+    elapsed: 30,
+    nowPlaying: {
+      album: 'Album Title',
+      artist: 'Artist Name',
+      title: 'Song Title',
+      length: 370,
+    },
   },
   reminderData: {},
   statusBarData: {

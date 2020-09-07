@@ -36,10 +36,5 @@ export default {
         }
       }
     });
-  },
-  unbind: function(el, binding, vnode) {
-    el.removeEventListener('touchstart');
-    el.removeEventListener('touchmove');
-    el.removeEventListener('touchend');
-  },
+  }
 };

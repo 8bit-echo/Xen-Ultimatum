@@ -1,23 +1,41 @@
 <template>
   <transition appear name="slideup">
     <div class="nav">
-      <router-link to="/">·</router-link>
-      <router-link to="/about">··</router-link>
-      <router-link to="/music" class="icon">&#xe911;</router-link>
-      <a v-for="app in customApps" :href="`xeninfo:openapp:${app}`" :key="app">I</a>
+      <router-link to="/"><span>·</span></router-link>
+      <router-link to="/about"><span>··</span></router-link>
+      <router-link to="/music" class="icon"><span>&#xe911;</span></router-link>
+
+      <a v-for="app in customApps" :href="`xeninfo:openapp:${app}`" :key="app" class="custom-app">
+        <img :src="getAppIcon(app)" />
+      </a>
+
       <a href="xeninfo:openapp:com.apple.springboard" class="icon">&#xe990;</a>
     </div>
   </transition>
 </template>
 
 <script>
-  import prefs from '../../public/preferences.json';
   export default {
     data() {
       return {
-        musicIcon: require('../assets/music.svg'),
-        customApps: prefs.customDockApps,
+        customApps: window.config.customDockApps,
       };
+    },
+    computed: {
+      remoteIcon() {
+        if (window.api) {
+          return api.apps.applicationForIdentifier('com.apple.TVRemote').icon;
+        }
+        return 'https://via.placeholder.com/128x128';
+      },
+    },
+    methods: {
+      getAppIcon(bundleID) {
+        if (window.api) {
+          return window.api.apps.applicationForIdentifier(bundleID).icon;
+        }
+        return 'https://placeholder.com/128x128';
+      },
     },
   };
 </script>
@@ -53,15 +71,18 @@
       font-weight: bold;
       color: white;
       margin: 0 10px;
-      display: inline-block;
-      padding: 20px;
-      height: 1rem;
-      width: 1rem;
+      height: 46px;
+      width: 46px;
       display: flex;
       justify-content: center;
       align-items: center;
       border: solid 3px transparent;
       text-decoration: none;
+
+      img {
+        max-width: 100%;
+      }
+
       &.router-link-exact-active {
         color: orange;
         background-color: black;
