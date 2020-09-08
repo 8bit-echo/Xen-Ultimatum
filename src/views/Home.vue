@@ -2,13 +2,13 @@
   <transition appear name="fadein">
     <div class="home">
       <div class="container" @dblclick="showForecast()">
-        <p><WeatherIcon :condition="weatherData.conditionCode" /></p>
+        <p><WeatherIcon :condition="weather.conditionCode" /></p>
         <div class="conditions">
-          <h5 class="temp">&darr;{{ weatherData.low }}</h5>
-          <h1 class="temp">{{ weatherData.feelsLike ? weatherData.feelsLike : '--' }}</h1>
-          <h5 class="temp">&uarr;{{ weatherData.high }}</h5>
+          <h5 class="temp">&darr;{{ weather.low }}</h5>
+          <h1 class="temp">{{ weather.feelsLike ? weather.feelsLike : '--' }}</h1>
+          <h5 class="temp">&uarr;{{ weather.high }}</h5>
         </div>
-        <p>{{ weatherData.condition }}</p>
+        <p>{{ weather.condition }}</p>
       </div>
       <Forecast v-show="showingForecasts" />
     </div>
@@ -27,7 +27,7 @@
       WeatherIcon,
     },
     computed: {
-      ...mapState(['weatherData', 'showingForecasts']),
+      ...mapState(['weather', 'showingForecasts']),
       remote() {
         return api.apps.applicationForIdentifier('com.apple.TVRemote').icon;
       },

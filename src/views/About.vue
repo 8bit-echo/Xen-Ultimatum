@@ -27,10 +27,10 @@
   import { format, isToday } from 'date-fns';
   export default {
     computed: {
-      ...mapState(['batteryData', 'eventData']),
+      ...mapState(['battery', 'event']),
       todaysEvents() {
-        if (this.eventData.events) {
-          const upcoming = this.eventData.events.filter((event) => {
+        if (this.event.events) {
+          const upcoming = this.event.events.filter((event) => {
             return isToday(new Date(event.date));
           });
 

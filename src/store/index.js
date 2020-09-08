@@ -6,41 +6,41 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    weatherData: {},
-    statusBarData: {},
-    batteryData: {},
-    alarmData: {},
-    systemData: {},
+    weather: {},
+    statusBar: {},
+    battery: {},
+    alarm: {},
+    system: {},
     music: {},
-    eventData: {},
-    reminderData: {},
+    event: {},
+    reminder: {},
     // ...sampleState,
     showingForecasts: false,
   },
   mutations: {
     WEATHER_DATA(state, payload) {
-      state.weatherData = payload;
+      state.weather = payload;
     },
     STATUS_BAR_DATA(state, payload) {
-      state.statusBarData = payload;
+      state.statusBar = payload;
     },
     BATTERY_DATA(state, payload) {
-      state.batteryData = payload;
+      state.battery = payload;
     },
     ALARM_DATA(state, payload) {
-      state.alarmData = payload;
+      state.alarm = payload;
     },
     SYSTEM_DATA(state, payload) {
-      state.systemData = payload;
+      state.system = payload;
     },
     MUSIC_DATA(state, payload) {
       state.music = payload;
     },
     EVENT_DATA(state, payload) {
-      state.eventData = payload;
+      state.event = payload;
     },
     REMINDER_DATA(state, payload) {
-      state.reminderData = payload;
+      state.reminder = payload;
     },
     TRACK_PROGRESS(state, payload) {
       state.music = { ...state.music, elapsed: payload };

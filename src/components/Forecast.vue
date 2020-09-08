@@ -54,18 +54,18 @@
       };
     },
     computed: {
-      ...mapState(['weatherData', 'showingForecasts']),
+      ...mapState(['weather', 'showingForecasts']),
       fiveDayMax() {
-        return Math.max(...this.weatherData.dayForecasts.slice(0, 5).map((day) => day.high));
+        return Math.max(...this.weather.dayForecasts.slice(0, 5).map((day) => day.high));
       },
       fiveDayMin() {
-        return Math.min(...this.weatherData.dayForecasts.slice(0, 5).map((day) => day.low));
+        return Math.min(...this.weather.dayForecasts.slice(0, 5).map((day) => day.low));
       },
       hourlyForecasts() {
-        return this.weatherData.hourlyForecasts ? this.weatherData.hourlyForecasts.slice(0, 5) : [];
+        return this.weather.hourlyForecasts ? this.weather.hourlyForecasts.slice(0, 5) : [];
       },
       dayForecasts() {
-        return this.weatherData.dayForecasts ? this.weatherData.dayForecasts.slice(0, 5) : [];
+        return this.weather.dayForecasts ? this.weather.dayForecasts.slice(0, 5) : [];
       },
     },
 

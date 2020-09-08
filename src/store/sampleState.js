@@ -1,5 +1,5 @@
 const sampleState = {
-  alarmData: {
+  alarm: {
     reminders: [
       {
         dueDate: '8/27/20',
@@ -471,7 +471,7 @@ const sampleState = {
       },
     ],
   },
-  batteryData: {
+  battery: {
     batteryCharging: 0,
     batteryPercent: 44,
     ramAvailable: 2146,
@@ -479,7 +479,7 @@ const sampleState = {
     ramPhysical: 2819,
     ramUsed: 1317,
   },
-  systemData: {
+  system: {
     deviceName: 'Airdrop Bandit',
     deviceType: 'iPhone X',
     ipAddress: '',
@@ -498,8 +498,8 @@ const sampleState = {
       length: 370,
     },
   },
-  reminderData: {},
-  statusBarData: {
+  reminder: {},
+  statusBar: {
     signalBars: 4,
     signalName: 'T-Mobile',
     signalNetworkType: 'LTE',
@@ -507,7 +507,7 @@ const sampleState = {
     wifiName: 'The Curiosity Shop',
     wifiStrength: '-49',
   },
-  eventData: {
+  event: {
     events: [
       {
         associatedCalendarHexColor: '#FF9500',
@@ -641,7 +641,7 @@ const sampleState = {
       },
     ],
   },
-  weatherData: {
+  weather: {
     address: {
       city: 'Boulder',
       country: 'United States',

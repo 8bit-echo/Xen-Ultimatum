@@ -53,7 +53,7 @@
         return this.music.nowPlaying && this.music.nowPlaying.length ? this.music.nowPlaying.length : 0;
       },
       albumArt() {
-        return this.music.isStopped ? `${albumBase}` : this.music.nowPlaying?.artwork;
+        return this.music.isStopped ? albumBase : this.music.nowPlaying?.artwork;
       },
       playPauseIcon() {
         return this.music.isPlaying ? 'xui://resource/default/media/pause.svg' : 'xui://resource/default/media/play.svg';
@@ -65,17 +65,10 @@
 
     filters: {
       toTimestamp(seconds) {
-        const mins = Math.round(seconds / 60);
-        let sec = Math.round(seconds % 60);
-
-        if (sec < 10) {
-          sec = '0' + sec;
+        if (seconds) {
+          return seconds >= 3600 ? new Date(seconds * 1000).toISOString().substr(11, 8) : new Date(seconds * 1000).toISOString().substr(14, 5);
         }
-        if (isNaN(mins) || isNaN(sec)) {
-          return '--:--';
-        }
-
-        return mins + ':' + sec;
+        return '--:--';
       },
     },
     methods: {
@@ -86,8 +79,7 @@
     },
     watch: {
       music: {
-        handler(newVal, oldVal) {
-        },
+        handler(newVal, oldVal) {},
         deep: true,
       },
     },
@@ -96,6 +88,8 @@
 
 <style lang="scss">
   .music {
+    max-width: 100vw;
+    max-height: 100vh;
     height: 100%;
     overflow: hidden;
   }
@@ -103,14 +97,14 @@
   .classic-theme {
     .background-art {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: -5vh;
+      left: -5vh;
       bottom: 0;
       right: 0;
       z-index: 0;
-      // width: 120%;
-      // height: 120%;
-      // background-image: url('../assets/Artwork.jpg');
+      width: 120vw;
+      height: 120vh;
+      background-image: url('../assets/Artwork.jpg');
       // background-image: url(file:///var/mobile/Documents/Artwork.jpg);
       background-size: cover;
       background-position: center;
