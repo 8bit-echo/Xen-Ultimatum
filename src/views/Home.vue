@@ -5,7 +5,7 @@
         <p><WeatherIcon :condition="weather.conditionCode" /></p>
         <div class="conditions">
           <h5 class="temp">&darr;{{ weather.low }}</h5>
-          <h1 class="temp">{{ weather.feelsLike ? weather.feelsLike : '--' }}</h1>
+          <h1 class="temp">{{ weather.hasOwnProperty('feelsLike') ? weather.feelsLike : '--' }}</h1>
           <h5 class="temp">&uarr;{{ weather.high }}</h5>
         </div>
         <p>{{ weather.condition }}</p>
