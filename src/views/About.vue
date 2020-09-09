@@ -18,6 +18,8 @@
       <div v-else>
         <span class="title">Nothing scheduled 🎉</span>
       </div>
+
+      <Calendar :locale="locale" />
     </div>
   </div>
 </template>
@@ -25,7 +27,18 @@
 <script>
   import { mapState } from 'vuex';
   import { format, isToday } from 'date-fns';
+  import Calendar from '../components/Calendar';
+  import locale from '../components/en';
   export default {
+    components: {
+      Calendar,
+    },
+
+    data() {
+      return {
+        locale
+      }
+    },
     computed: {
       ...mapState(['battery', 'event']),
       todaysEvents() {
