@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" @dblclick="$store.commit('TOGGLE_CAL', true)">
     <div class="events">
       <div v-if="todaysEvents.length">
         <div
@@ -11,16 +11,18 @@
           <span class="title">
             {{ event.title }}
           </span>
-          <div v-if="!event.isAllDay" class="times">{{ event.startTimeTimestamp | toTime }} &ndash; {{ event.endTimeTimestamp | toTime }}</div>
+          <div v-if="!event.isAllDay" class="times">
+            {{ event.startTimeTimestamp | toTime }} &ndash;
+            {{ event.endTimeTimestamp | toTime }}
+          </div>
         </div>
       </div>
 
       <div v-else>
         <span class="title">Nothing scheduled 🎉</span>
       </div>
-
-      <Calendar :locale="locale" />
     </div>
+    <Calendar :locale="locale" v-show="showingCal" />
   </div>
 </template>
 
@@ -36,11 +38,11 @@
 
     data() {
       return {
-        locale
-      }
+        locale,
+      };
     },
     computed: {
-      ...mapState(['battery', 'event']),
+      ...mapState(['battery', 'event', 'showingCal']),
       todaysEvents() {
         if (this.event.events) {
           const upcoming = this.event.events.filter((event) => {

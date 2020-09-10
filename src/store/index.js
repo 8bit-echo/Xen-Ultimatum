@@ -12,10 +12,17 @@ export default new Vuex.Store({
     alarm: {},
     system: {},
     music: {},
+    //   nowPlaying: {
+    //     title: 'A Clock without a crafstman',
+    //     artist: 'Lee McKinney',
+    //     album: 'Infinite Mind'
+    //   }
+    // },
     event: {},
     reminder: {},
     // ...sampleState,
     showingForecasts: false,
+    showingCal: false
   },
   mutations: {
     WEATHER_DATA(state, payload) {
@@ -48,6 +55,9 @@ export default new Vuex.Store({
     TOGGLE_FORECAST(state, payload) {
       state.showingForecasts = payload;
     },
+    TOGGLE_CAL(state, payload) {
+      state.showingCal = payload;
+    }
   },
   actions: {
     updateWeather({ commit, state }) {
@@ -73,7 +83,7 @@ export default new Vuex.Store({
     },
     updateReminder({ commit, state }) {
       commit('REMINDER_DATA', state);
-    },
+    }
   },
-  modules: {},
+  modules: {}
 });

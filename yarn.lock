@@ -9180,6 +9180,11 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-renderless-calendar@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vue-renderless-calendar/-/vue-renderless-calendar-2.1.0.tgz#e6fdd09aa37811903cef444c755a807dc67a9c4f"
+  integrity sha512-1TQVqzTNI8VC4MY5L4zylIavjgeDpxQKSSBd++zS2WXLXG8/uP5Kl45rWPjeyFcy5OAIcJBfEGvlh5IRPSMZpQ==
+
 vue-router@^3.2.0:
   version "3.4.3"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.4.3.tgz?cache=0&sync_timestamp=1597843889258&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-3.4.3.tgz#fa93768616ee338aa174f160ac965167fa572ffa"

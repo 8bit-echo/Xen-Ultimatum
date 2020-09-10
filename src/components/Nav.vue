@@ -1,11 +1,16 @@
 <template>
   <transition appear name="slideup">
     <div class="nav">
-      <router-link to="/"><span>·</span></router-link>
-      <router-link to="/about"><span>··</span></router-link>
+      <router-link to="/"><span class="icon"></span></router-link>
+      <router-link to="/about"><span class="icon"></span></router-link>
       <router-link to="/music" class="icon"><span>&#xe911;</span></router-link>
 
-      <a v-for="app in customApps" :href="`xeninfo:openapp:${app}`" :key="app" class="custom-app">
+      <a
+        v-for="app in customApps"
+        :href="`xeninfo:openapp:${app}`"
+        :key="app"
+        class="custom-app"
+      >
         <img :src="getAppIcon(app)" />
       </a>
 

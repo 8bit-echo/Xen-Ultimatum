@@ -1,14 +1,27 @@
 <template>
   <transition appear name="slidein">
     <div class="forecast-sheet" @dblclick="dismiss()">
-      <div class="pages" ref="pages" v-swipe.left="leftSwipe" v-swipe.right="rightSwipe" v-swipe.down="dismiss">
+      <div
+        class="pages"
+        ref="pages"
+        v-swipe.left="leftSwipe"
+        v-swipe.right="rightSwipe"
+        v-swipe.down="dismiss"
+      >
         <section class="page">
           <h3>Hourly</h3>
           <div class="contents">
-            <div class="weather-info" v-for="hour in hourlyForecasts" :key="hour.time">
+            <div
+              class="weather-info"
+              v-for="hour in hourlyForecasts"
+              :key="hour.time"
+            >
               <WeatherIcon :condition="hour.conditionCode" />
               <span class="temp">{{ hour.temperature }}</span>
-              <div class="pill" :style="{ background: bgFromTemp(hour.temperature) }"></div>
+              <div
+                class="pill"
+                :style="{ background: bgFromTemp(hour.temperature) }"
+              ></div>
               {{ hour.time | removeZeros }}
             </div>
           </div>
@@ -17,12 +30,22 @@
         <section class="page">
           <h3>Daily</h3>
           <div class="contents">
-            <div class="weather-info" v-for="day in dayForecasts" :key="day.dayNumber">
+            <div
+              class="weather-info"
+              v-for="day in dayForecasts"
+              :key="day.dayNumber"
+            >
               <WeatherIcon :condition="day.icon" />
               <span class="temp">{{ day.high }}</span>
               <div class="pill">
-                <div class="high indicator" :style="{ bottom: positionFromTemp(day.high) }"></div>
-                <div class="low indicator" :style="{ bottom: positionFromTemp(day.low) }"></div>
+                <div
+                  class="high indicator"
+                  :style="{ bottom: positionFromTemp(day.high) }"
+                ></div>
+                <div
+                  class="low indicator"
+                  :style="{ bottom: positionFromTemp(day.low) }"
+                ></div>
               </div>
               <span class="temp">{{ day.low }}</span>
             </div>
@@ -56,16 +79,24 @@
     computed: {
       ...mapState(['weather', 'showingForecasts']),
       fiveDayMax() {
-        return Math.max(...this.weather.dayForecasts.slice(0, 5).map((day) => day.high));
+        return Math.max(
+          ...this.weather.dayForecasts.slice(0, 5).map((day) => day.high)
+        );
       },
       fiveDayMin() {
-        return Math.min(...this.weather.dayForecasts.slice(0, 5).map((day) => day.low));
+        return Math.min(
+          ...this.weather.dayForecasts.slice(0, 5).map((day) => day.low)
+        );
       },
       hourlyForecasts() {
-        return this.weather.hourlyForecasts ? this.weather.hourlyForecasts.slice(0, 5) : [];
+        return this.weather.hourlyForecasts
+          ? this.weather.hourlyForecasts.slice(0, 5)
+          : [];
       },
       dayForecasts() {
-        return this.weather.dayForecasts ? this.weather.dayForecasts.slice(0, 5) : [];
+        return this.weather.dayForecasts
+          ? this.weather.dayForecasts.slice(0, 5)
+          : [];
       },
     },
 
@@ -77,12 +108,24 @@
 
     methods: {
       bgFromTemp(temp) {
-        const percent = parseFloat((((temp - this.fiveDayMin) / (this.fiveDayMax - this.fiveDayMin)) * 100).toFixed(1));
-        return `linear-gradient(0deg, white 0%, white ${percent}%, transparent ${percent + 0.01}%, transparent 100%)`;
+        const percent = parseFloat(
+          (
+            ((temp - this.fiveDayMin) / (this.fiveDayMax - this.fiveDayMin)) *
+            100
+          ).toFixed(1)
+        );
+        return `linear-gradient(0deg, white 0%, white ${percent}%, transparent ${
+          percent + 0.01
+        }%, transparent 100%)`;
       },
 
       positionFromTemp(temp) {
-        const percent = parseFloat((((temp - this.fiveDayMin) / (this.fiveDayMax - this.fiveDayMin)) * 100).toFixed(1));
+        const percent = parseFloat(
+          (
+            ((temp - this.fiveDayMin) / (this.fiveDayMax - this.fiveDayMin)) *
+            100
+          ).toFixed(1)
+        );
         return `${percent}%`;
       },
 

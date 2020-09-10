@@ -8,13 +8,13 @@
       condition: {
         type: Number,
         required: false,
-        default: 32
+        default: 32,
       },
     },
     computed: {
       icon() {
         return require(`../assets/Klear/${this.condition}.png`);
-      }
-    }
+      },
+    },
   };
 </script>

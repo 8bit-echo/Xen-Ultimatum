@@ -81,10 +81,6 @@
   $cell-height: 40px;
   $radius: 3px;
 
-  $color-primary: #387fbf;
-  $color-accent: #ff8a00;
-  $light-gray: #2c2c91;
-
   .calendar-cell {
     border-radius: 10px;
     border: none;
@@ -100,29 +96,31 @@
     font-weight: 600;
     cursor: pointer;
     position: relative;
-    color: black;
+    color: inherit;
     background-color: transparent;
 
     &.--between {
-      background-color: $light-gray;
+      background-color: lightgray;
       border-radius: 0;
     }
     &.--weekend {
-      color: red;
+      // color: rgba(blue, 0.75);
+      // opacity: 0.5;
     }
     &.--is-other-month-day:not(.--disabled):not(.--between):not(.--selected) {
-      opacity: 0.25;
+      opacity: 0.15;
     }
     &:focus:not(.--selected) {
       outline: none;
     }
     &.--between:focus {
-      background-color: darken($light-gray, 3%);
+      background-color: darken(lightgray, 3%);
     }
     &.--selected:focus {
       outline: none;
-      background-color: darken($light-gray, 10%);
+      background-color: darken(lightgray, 10%);
     }
+
     &.--isToday {
       background-color: black;
       color: white;

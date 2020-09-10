@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && mv dist/index.html dist/LockBackground.html",
+    "build": "vue-cli-service build",
     "copy": "scp -r ./dist/* root@192.168.0.9:/User/Library/Widgets/Lockscreen/XenUltimatum/",
     "lint": "vue-cli-service lint",
     "push": "yarn build && yarn copy"

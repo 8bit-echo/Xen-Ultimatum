@@ -15,8 +15,10 @@
     computed: {
       ...mapState(['music']),
       backgroundImage() {
-        return process.env.NODE_ENV === 'development' ? 'url(https://picsum.photos/375/812)' : 'none';
-      }
+        return process.env.NODE_ENV === 'development'
+          ? 'url(https://picsum.photos/375/812)'
+          : 'none';
+      },
     },
 
     // watch: {
@@ -72,9 +74,13 @@
 
   .temp {
     margin: 0 1rem;
+    position: relative;
     &::after {
+      // right: -16px;
+      // top: 0;
       position: absolute;
       content: '°';
+      // display: inline-block;
     }
   }
 </style>

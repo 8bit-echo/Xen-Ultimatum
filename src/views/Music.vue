@@ -1,8 +1,14 @@
 <template>
   <div class="music dribbble-theme">
-    <div class="background-art" :style="{ backgroundImage: `url(${albumArt})` }"></div>
+    <div
+      class="background-art"
+      :style="{ backgroundImage: `url(${albumArt})` }"
+    ></div>
     <div class="foreground">
-      <div :class="{ 'album-artwork': true, playing: music.isPlaying }" :style="{ backgroundImage: `url(${albumArt})` }"></div>
+      <div
+        :class="{ 'album-artwork': true, playing: music.isPlaying }"
+        :style="{ backgroundImage: `url(${albumArt})` }"
+      ></div>
 
       <div class="track-info">
         <h2 class="song">{{ title }}</h2>
@@ -18,8 +24,12 @@
         </div>
 
         <div class="controls">
-          <a href="xeninfo:prevtrack" class="prev smaller"><img src="xui://resource/default/media/previous.svg" /></a>
-          <a href="xeninfo:playpause" class="play-pause"><img :src="playPauseIcon" /></a>
+          <a href="xeninfo:prevtrack" class="prev smaller"
+            ><img src="xui://resource/default/media/previous.svg"
+          /></a>
+          <a href="xeninfo:playpause" class="play-pause"
+            ><img :src="playPauseIcon"
+          /></a>
           <a href="xeninfo:nexttrack" class="next smaller">
             <img src="xui://resource/default/media/next.svg" />
           </a>
@@ -50,13 +60,17 @@
         return this.music.nowPlaying ? this.music.nowPlaying.album : '';
       },
       duration() {
-        return this.music.nowPlaying && this.music.nowPlaying.length ? this.music.nowPlaying.length : 0;
+        return this.music.nowPlaying && this.music.nowPlaying.length
+          ? this.music.nowPlaying.length
+          : 0;
       },
       albumArt() {
         return this.music.isStopped ? albumBase : this.music.nowPlaying?.artwork;
       },
       playPauseIcon() {
-        return this.music.isPlaying ? 'xui://resource/default/media/pause.svg' : 'xui://resource/default/media/play.svg';
+        return this.music.isPlaying
+          ? 'xui://resource/default/media/pause.svg'
+          : 'xui://resource/default/media/play.svg';
       },
       complete() {
         return Math.floor((this.music.elapsed / this.duration) * 100);
@@ -66,7 +80,9 @@
     filters: {
       toTimestamp(seconds) {
         if (seconds) {
-          return seconds >= 3600 ? new Date(seconds * 1000).toISOString().substr(11, 8) : new Date(seconds * 1000).toISOString().substr(14, 5);
+          return seconds >= 3600
+            ? new Date(seconds * 1000).toISOString().substr(11, 8)
+            : new Date(seconds * 1000).toISOString().substr(14, 5);
         }
         return '--:--';
       },
@@ -74,7 +90,13 @@
     methods: {
       toSeconds(timestamp) {
         const parts = timestamp.split(':');
-        return parts.map((part, i) => (i !== parts.length - 1 ? parseInt(part) * Math.pow(60, i + 1) : parseInt(part))).reduce((seconds, part) => seconds + part);
+        return parts
+          .map((part, i) =>
+            i !== parts.length - 1
+              ? parseInt(part) * Math.pow(60, i + 1)
+              : parseInt(part)
+          )
+          .reduce((seconds, part) => seconds + part);
       },
     },
     watch: {
@@ -87,6 +109,10 @@
 </script>
 
 <style lang="scss">
+  @font-face {
+    font-family: 'Titillium';
+    src: url('../assets/TitilliumWeb-Black.ttf') format('truetype');
+  }
   .music {
     max-width: 100vw;
     max-height: 100vh;
@@ -131,7 +157,6 @@
 
     .track-info {
       text-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
-
       h3,
       h4 {
         min-height: 1.5rem;
@@ -250,8 +275,9 @@
     }
 
     .track-ui {
-      position: relative;
-      top: 25vh;
+      width: 100%;
+      position: fixed;
+      bottom: 30vh;
 
       .progress {
         max-width: 80vw;
@@ -261,11 +287,15 @@
     }
 
     .song {
+      font-family: 'Titillium';
       font-style: italic;
       text-transform: uppercase;
-      font-size: 1.75rem;
+      font-size: 2.5rem;
+      max-width: 97%;
       word-break: break-word;
       font-weight: 900;
+      transform: skewX(-9deg);
+      line-height: 1;
     }
 
     .artist {
@@ -273,10 +303,11 @@
       width: 35vw;
       font-weight: lighter;
       // background: pink;
+      margin-left: 0;
     }
 
     .album {
-      display: none;
+      // display: none;
     }
 
     .controls {
