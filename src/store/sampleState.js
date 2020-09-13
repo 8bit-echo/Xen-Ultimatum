@@ -512,11 +512,11 @@ const sampleState = {
       {
         associatedCalendarHexColor: '#FF9500',
         associatedCalendarName: 'Calendar',
-        date: '8/28/20',
-        endTimeTimestamp: 1598627700,
+        date: '9/13/20',
+        endTimeTimestamp: 1600026067,
         isAllDay: 0,
         location: 'https://fourwindsinteractive.zoom.us/j/94419317730',
-        startTimeTimestamp: 1598625000,
+        startTimeTimestamp: 1600025067,
         title: 'LLAMA [Leadership Listens Ask Me Anything]'
       },
       {
@@ -582,12 +582,12 @@ const sampleState = {
       {
         associatedCalendarHexColor: '#008000',
         associatedCalendarName: 'Lacee Health',
-        date: '8/29/20',
-        endTimeTimestamp: 1598723100,
+        date: '9/13/20',
+        endTimeTimestamp: 1600055067,
         isAllDay: 0,
         location:
           'prAna Boulder 1147 Pearl St, Boulder, CO  80302, United States',
-        startTimeTimestamp: 1598718600,
+        startTimeTimestamp: 1600065067,
         title: 'PrAna Yoga'
       },
       {

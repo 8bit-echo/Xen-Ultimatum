@@ -6,7 +6,7 @@
           class="event"
           v-for="event in todaysEvents"
           :key="Math.floor(Math.random() * event.startTimeTimestamp)"
-          :style="{ backgroundColor: event.associatedCalendarHexColor + 'AA' }"
+          :style="{ borderColor: event.associatedCalendarHexColor }"
         >
           <span class="title">
             {{ event.title }}
@@ -71,11 +71,21 @@
     align-items: center;
   }
   .event {
-    width: 70vw;
+    width: 90vw;
+    font-size: 0.9rem;
     text-align: left;
-    padding: 5px;
+    padding: 8px;
     border-radius: 5px;
-    margin: 5px auto;
+    margin: 8px auto;
+    background-color: rgba(black, 30%);
+    backdrop-filter: blur(30px);
+    border-left: solid 5px;
+
+    @media (prefers-color-scheme: light) {
+      background-color: rgba(white, 50%);
+      color: black;
+      text-shadow: none;
+    }
 
     .title {
       font-weight: bold;

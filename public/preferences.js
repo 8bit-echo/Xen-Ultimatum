@@ -1,3 +1,4 @@
 window.config = {
-  customDockApps: ['com.apple.TVRemote'],
+  customDockApps: [],
+  accentColor: '#2592ef'
 };

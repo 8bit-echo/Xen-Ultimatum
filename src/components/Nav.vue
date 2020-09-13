@@ -2,7 +2,8 @@
   <transition appear name="slideup">
     <div class="nav">
       <router-link to="/"><span class="icon"></span></router-link>
-      <router-link to="/about"><span class="icon"></span></router-link>
+      <router-link to="/weather"><span class="icon"></span></router-link>
+      <router-link to="/calendar"><span class="icon"></span></router-link>
       <router-link to="/music" class="icon"><span>&#xe911;</span></router-link>
 
       <a
@@ -89,7 +90,7 @@
       }
 
       &.router-link-exact-active {
-        color: orange;
+        // color: orange;
         background-color: black;
         border-radius: 50%;
         border: solid 3px rgb(39, 39, 39);

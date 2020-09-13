@@ -1,0 +1,67 @@
+.music.classic-theme {
+  .background-art {
+    position: absolute;
+    top: -5vh;
+    left: -5vh;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    width: 120vw;
+    height: 120vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(30px);
+  }
+
+  .foreground {
+    position: relative;
+    z-index: 2;
+    margin-top: 10vh;
+  }
+  .album-artwork {
+    height: 320px;
+    width: 320px;
+    margin: auto;
+    margin-top: 15px;
+    border: solid 10px white;
+    background-color: ghostwhite;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .track-info {
+    text-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+    h3,
+    h4 {
+      min-height: 1.5rem;
+      font-weight: normal;
+    }
+  }
+
+  .progress {
+    max-width: 80vw;
+    margin: auto;
+    display: flex;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2rem;
+
+    button,
+    a {
+      outline: none;
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 2rem;
+      text-decoration: none;
+      max-width: 35px;
+    }
+  }
+}

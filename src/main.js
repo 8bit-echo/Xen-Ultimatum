@@ -5,6 +5,7 @@ import store from './store';
 import SwipeRecognizer from './components/SwipeRecognizer';
 import fixScrollbehavior from 'smoothscroll-polyfill';
 require('../public/config.json');
+require('./scss/main.scss');
 
 fixScrollbehavior.polyfill();
 
@@ -16,3 +17,7 @@ window.app = new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+
+const style = document.createElement('style');
+style.innerHTML = `a.router-link-exact-active {color: ${window.config.accentColor} !important;}`;
+document.head.appendChild(style);

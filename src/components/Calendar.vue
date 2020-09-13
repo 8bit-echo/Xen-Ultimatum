@@ -124,7 +124,7 @@
         display: block;
         content: '';
         width: 100%;
-        border-top: solid 1px lightgray;
+        border-top: solid 1px #808080;
       }
     }
 
