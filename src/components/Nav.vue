@@ -24,23 +24,18 @@
   export default {
     data() {
       return {
+        // from prefrences.js
         customApps: window.config.customDockApps,
       };
     },
-    computed: {
-      remoteIcon() {
-        if (window.api) {
-          return api.apps.applicationForIdentifier('com.apple.TVRemote').icon;
-        }
-        return 'https://via.placeholder.com/128x128';
-      },
-    },
     methods: {
+      // get user app icon from bundle ID
       getAppIcon(bundleID) {
         if (window.api) {
           return window.api.apps.applicationForIdentifier(bundleID).icon;
         }
-        return 'https://placeholder.com/128x128';
+        // for desktop development only
+        return 'https://placeholder.com/46x46';
       },
     },
   };

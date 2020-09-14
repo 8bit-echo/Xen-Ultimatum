@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { format } from 'date-fns';
 // import sampleState from './sampleState';
 
 Vue.use(Vuex);
@@ -22,7 +23,8 @@ export default new Vuex.Store({
     reminder: {},
     // ...sampleState,
     showingForecasts: false,
-    showingCal: false
+    showingCal: false,
+    timeTravelDate: format(new Date(), 'YYYY-MM-DD')
   },
   mutations: {
     WEATHER_DATA(state, payload) {
@@ -57,6 +59,9 @@ export default new Vuex.Store({
     },
     TOGGLE_CAL(state, payload) {
       state.showingCal = payload;
+    },
+    TIME_TRAVEL_DATE(state, payload) {
+      state.timeTravelDate = payload;
     }
   },
   actions: {

@@ -1,5 +1,10 @@
+/**
+ * Gesture Recognizer for Vue.js as v-swipe directive.
+ * modifiers: .left, .right, .down, .up
+ * requires swipe to be more than 50px long to fire.
+ */
 export default {
-  bind(el, binding, vnode) {
+  bind(el, binding) {
     let start;
     let end;
     let isSwipe = false;
@@ -37,15 +42,21 @@ export default {
         }
 
         if (
-          ((direction === 'left' || direction === 'right') && delta.x <= 50) &&
-          ((direction === 'up' || direction === 'down') && delta.y <= 50)
+          (direction === 'left' || direction === 'right') &&
+          Math.abs(delta.x) <= 50 &&
+          (direction === 'up' || direction === 'down') &&
+          Math.abs(delta.y) <= 50
         ) {
           return;
         }
 
         if (binding.modifiers && binding.modifiers[direction]) {
           binding.value(direction);
-          // binding.expression();
+          // reset
+          start = 0;
+          end = 0;
+          isSwipe = false;
+          direction = false;
         }
       }
     });

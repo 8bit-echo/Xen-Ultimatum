@@ -1,3 +1,4 @@
+// hardcoded enumeration of months and days for vue-renderless-calendar
 const months = [
   {
     short: 'Jan',

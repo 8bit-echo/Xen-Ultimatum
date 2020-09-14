@@ -5,6 +5,7 @@
         <p><WeatherIcon :condition="weather.conditionCode" /></p>
         <div class="conditions">
           <h5 class="temp">&darr;{{ weather.low }}</h5>
+          <!-- do not let the next line format. breaks layout on Safari -->
           <h1 class="temp">{{ weather.hasOwnProperty('feelsLike') ? weather.feelsLike : '--' }}</h1>
           <h5 class="temp">&uarr;{{ weather.high }}</h5>
         </div>
@@ -26,46 +27,14 @@
       WeatherIcon,
     },
     computed: {
-      ...mapState(['weather', 'showingForecasts']),
-      remote() {
-        return api.apps.applicationForIdentifier('com.apple.TVRemote').icon;
-      },
+      ...mapState(['weather', 'showingForecasts'])
     },
     methods: {
       ...mapMutations([]),
+      // toggles forecast modal
       showForecast() {
         this.$store.commit('TOGGLE_FORECAST', !this.showingForecasts);
       },
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  .weather {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -10vmin;
-    opacity: 1;
-    font-size: 1.25em;
-  }
-
-  .conditions {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .fadein-enter {
-    opacity: 0;
-    &-active {
-      transition: opacity 1s ease-out;
-    }
-  }
-
-  p {
-    margin: 0;
-  }
-</style>

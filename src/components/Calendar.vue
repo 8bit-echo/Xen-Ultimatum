@@ -8,9 +8,13 @@
         weekDayNames,
         monthNames,
         calendar,
+        selectedDates,
+        onDateSelect,
       }"
       :weekdayStartsOn="0"
       :locale="locale"
+      :default-selected-dates="today"
+      @onDateChange="dateChange"
       mode="single"
     >
       <div class="calendar-root" v-swipe.down="dismiss">
@@ -18,6 +22,7 @@
           v-for="view in calendar"
           :key="`${view.month}-${view.year}`"
           class="calendar"
+          :data-date-1="selectedDates[0]"
         >
           <div class="calendar__header">
             <span class="calendar__title" style="text-transform: capitalize"
@@ -46,6 +51,7 @@
               :key="date.ms"
               v-bind="getModifiers(date)"
               :date="date"
+              @click.native="onDateSelect(date)"
             />
           </div>
         </div>
@@ -57,6 +63,7 @@
 <script>
   import { RenderlessCalendar } from 'vue-renderless-calendar/lib/index';
   import CalendarCell from './CalendarCell.vue';
+  import { mapMutations, mapState } from 'vuex';
   export default {
     name: 'Calendar',
     components: {
@@ -66,10 +73,25 @@
     props: {
       locale: [String, Object],
     },
+
+    computed: {
+      ...mapState(['timeTravelDate']),
+      today() {
+        return [this.timeTravelDate];
+      },
+    },
+
     methods: {
+      ...mapMutations(['TIME_TRAVEL_DATE']),
+      // dismiss the calendar modal.
       dismiss() {
         console.log('dismiss method');
         this.$store.commit('TOGGLE_CAL', false);
+      },
+
+      // fires when user selects a date on the calendar modal
+      dateChange([payload]) {
+        this.$store.commit('TIME_TRAVEL_DATE', payload.formatted);
       },
     },
   };

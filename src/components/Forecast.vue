@@ -73,26 +73,31 @@
 
     data() {
       return {
+        // keeps track of hourly vs daily for nav dots
         page: 0,
       };
     },
     computed: {
       ...mapState(['weather', 'showingForecasts']),
+      // highest temperature in 5 day span
       fiveDayMax() {
         return Math.max(
           ...this.weather.dayForecasts.slice(0, 5).map((day) => day.high)
         );
       },
+      // lowest temperature in 5 day span
       fiveDayMin() {
         return Math.min(
           ...this.weather.dayForecasts.slice(0, 5).map((day) => day.low)
         );
       },
+      // limit array to 5 objects
       hourlyForecasts() {
         return this.weather.hourlyForecasts
           ? this.weather.hourlyForecasts.slice(0, 5)
           : [];
       },
+      // limit array to 5 objects
       dayForecasts() {
         return this.weather.dayForecasts
           ? this.weather.dayForecasts.slice(0, 5)
@@ -101,12 +106,14 @@
     },
 
     filters: {
+      // only show the hour number in the forecast to save space.
       removeZeros(time) {
         return time.replace(':00', '');
       },
     },
 
     methods: {
+      // create illusion of status bar with linear gradient stops.
       bgFromTemp(temp) {
         const percent = parseFloat(
           (
@@ -119,6 +126,7 @@
         }%, transparent 100%)`;
       },
 
+      // gets position in a number range as percentage. (high / low)
       positionFromTemp(temp) {
         const percent = parseFloat(
           (
@@ -129,16 +137,17 @@
         return `${percent}%`;
       },
 
+      // handle left swipe gesture on forecast modal
       leftSwipe() {
         this.$refs.pages.scrollTo({ left: 1000, top: 0, behavior: 'smooth' });
         this.page = 1;
       },
-
+      // handle right swipe gesture on forecast modal
       rightSwipe() {
         this.$refs.pages.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         this.page = 0;
       },
-
+      // handle down swipe gesture on forecast modal
       dismiss() {
         this.$store.commit('TOGGLE_FORECAST', false);
       },

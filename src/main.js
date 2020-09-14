@@ -4,10 +4,12 @@ import router from './router';
 import store from './store';
 import SwipeRecognizer from './components/SwipeRecognizer';
 import fixScrollbehavior from 'smoothscroll-polyfill';
+import createUserStyleNode from './util/createUserStyles';
 require('../public/config.json');
 require('./scss/main.scss');
 
 fixScrollbehavior.polyfill();
+createUserStyleNode();
 
 Vue.directive('swipe', SwipeRecognizer);
 Vue.config.productionTip = false;
@@ -17,7 +19,3 @@ window.app = new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
-
-const style = document.createElement('style');
-style.innerHTML = `a.router-link-exact-active {color: ${window.config.accentColor} !important;}`;
-document.head.appendChild(style);

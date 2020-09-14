@@ -28,25 +28,30 @@
 
 <script>
   import { mapState } from 'vuex';
-  import { format, isToday } from 'date-fns';
+  import { format } from 'date-fns';
   import Calendar from '../components/Calendar';
   import locale from '../components/en';
   export default {
+    name: 'CalendarWidget',
     components: {
       Calendar,
     },
 
     data() {
       return {
+        // used only for binding into renderless calendar component
         locale,
       };
     },
     computed: {
-      ...mapState(['battery', 'event', 'showingCal']),
+      ...mapState(['battery', 'event', 'showingCal', 'timeTravelDate']),
+      // filter list to either today || selected date from modal month view
       todaysEvents() {
         if (this.event.events) {
           const upcoming = this.event.events.filter((event) => {
-            return isToday(new Date(event.date));
+            return (
+              format(new Date(event.date), 'YYYY-MM-DD') === this.timeTravelDate
+            );
           });
 
           return upcoming.length > 5 ? upcoming.slice(0, 5) : upcoming;
@@ -55,10 +60,11 @@
       },
     },
     filters: {
+      // I hate working with JS dates.
       toTime(unixTime) {
         return format(new Date(unixTime * 1000), 'HH:mm');
       },
-    },
+    }
   };
 </script>
 

@@ -12,6 +12,7 @@
       Nav,
     },
     computed: {
+      // gets a random background image on safari for development env
       backgroundImage() {
         return process.env.NODE_ENV === 'development'
           ? 'url(https://picsum.photos/375/812)'

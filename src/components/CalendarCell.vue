@@ -1,5 +1,7 @@
 <template>
-  <button class="calendar-cell" :data-date="date.day" :class="rootClasses">{{ date.day }}</button>
+  <button class="calendar-cell" :data-date="date.day" :class="rootClasses">
+    {{ date.day }}
+  </button>
 </template>
 
 <script>
@@ -59,17 +61,17 @@
       rootClasses() {
         return {
           '--is-other-month-day': this.date.isOtherMonthDay,
-          // "--selected": this.isSelected,
+          '--selected': this.isSelected,
           '--weekend': this.date.isWeekend,
-          // "--disabled": this.isDisabled,
           '--isToday': this.date.isToday,
-          '--between': this.isBetween,
           '--first': this.isFirst,
           '--last': this.isLast,
-          '--one-day-before': this.isOneDayBefore,
-          '--one-day-after': this.isOneDayAfter,
-          '--one-day-before-first': this.isOneDayBeforeFirst,
-          '--one-day-before-last': this.isOneDayBeforeLast,
+          // "--disabled": this.isDisabled,
+          // '--between': this.isBetween,
+          // '--one-day-before': this.isOneDayBefore,
+          // '--one-day-after': this.isOneDayAfter,
+          // '--one-day-before-first': this.isOneDayBeforeFirst,
+          // '--one-day-before-last': this.isOneDayBeforeLast,
         };
       },
     },
@@ -116,13 +118,23 @@
     &.--between:focus {
       background-color: darken(lightgray, 3%);
     }
-    &.--selected:focus {
+    &.--selected {
+      position: relative;
       outline: none;
-      background-color: darken(lightgray, 10%);
+
+      &::after {
+        content: '';
+        position: absolute;
+        font-size: 3rem;
+        top: 80%;
+        border-radius: 50%;
+        width: 5px;
+        height: 5px;
+      }
     }
 
     &.--isToday {
-      background-color: black;
+      background-color: rgba(black, 50%);
       color: white;
     }
   }

@@ -1,0 +1,27 @@
+.weather {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -10vmin;
+  opacity: 1;
+  font-size: 1.25em;
+
+  .conditions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fadein-enter {
+    opacity: 0;
+    &-active {
+      transition: opacity 1s ease-out;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+}

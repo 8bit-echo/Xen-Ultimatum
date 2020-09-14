@@ -1,5 +1,5 @@
 <template>
-  <div class="music dribbble-theme">
+  <div :class="['music', `${theme}-theme`]">
     <div
       class="background-art"
       :style="{ backgroundImage: `url(${albumArt})` }"
@@ -48,8 +48,14 @@
     components: {
       ProgressBar,
     },
+    data() {
+      return {
+        theme: 'dribbble',
+      };
+    },
     computed: {
       ...mapState(['music']),
+      // I don't think these are needed with the new observer API.
       title() {
         return this.music.nowPlaying ? this.music.nowPlaying.title : '';
       },
@@ -78,6 +84,8 @@
     },
 
     filters: {
+      // turn seconds into a timestamp by overloading the native JS Date object.
+      /* NOTE: Fails on tracks longer than 24hrs long */
       toTimestamp(seconds) {
         if (seconds) {
           return seconds >= 3600
@@ -87,20 +95,9 @@
         return '--:--';
       },
     },
-    methods: {
-      toSeconds(timestamp) {
-        const parts = timestamp.split(':');
-        return parts
-          .map((part, i) =>
-            i !== parts.length - 1
-              ? parseInt(part) * Math.pow(60, i + 1)
-              : parseInt(part)
-          )
-          .reduce((seconds, part) => seconds + part);
-      },
-    },
     watch: {
       music: {
+        // required for nested objects since they pass-by-reference
         handler(newVal, oldVal) {},
         deep: true,
       },

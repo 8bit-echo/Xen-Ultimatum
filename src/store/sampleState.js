@@ -644,16 +644,6 @@ const sampleState = {
     ]
   },
   weather: {
-    address: {
-      city: 'Boulder',
-      country: 'United States',
-      countryISOCode: 'US',
-      county: 'Boulder',
-      neighbourhood: 'Southeast Boulder',
-      postalCode: 80303,
-      state: 'CO',
-      street: '845 30th St'
-    },
     celsius: 'C',
     chanceofrain: 0,
     city: 'Boulder',
