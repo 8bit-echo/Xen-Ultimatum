@@ -13,7 +13,9 @@
     },
     computed: {
       icon() {
-        return require(`../assets/Klear/${this.condition}.png`);
+        return process.env.NODE_ENV === 'development'
+          ? `xui://resource/default/weather/${this.condition}.svg`
+          : require(`../assets/Klear/${this.condition}.png`);
       },
     },
   };

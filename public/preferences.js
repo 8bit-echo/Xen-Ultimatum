@@ -1,4 +1,6 @@
 window.config = {
-  customDockApps: [],
+  customDockApps: [
+    // 'com.bundleID.appName'
+  ],
   accentColor: '#2592ef'
 };
